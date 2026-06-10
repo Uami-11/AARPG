@@ -6,15 +6,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(16, 15)
 
-[node name="Player" type="CharacterBody2D" unique_id=606448413]
+[node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite")]
 script = ExtResource("1_abrql")
+sprite = NodePath("AnimatedSprite2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1316207255]
 position = Vector2(0, -20)
 sprite_frames = ExtResource("2_abrql")
-animation = &"idle_down"
+animation = &"run_side"
 autoplay = "idle_down"
-frame_progress = 0.8027704
+frame_progress = 0.73955595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
 position = Vector2(0, -6.5)
