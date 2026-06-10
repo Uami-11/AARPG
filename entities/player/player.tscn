@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dcl0s2y5lmfvm"]
+
+[ext_resource type="Texture2D" uid="uid://jolqhwg55fum" path="res://entities/player/sprites/ExamplePlayerSprite.png" id="1_symyc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
+size = Vector2(16, 15)
+
+[node name="Player" type="CharacterBody2D" unique_id=606448413]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=818882439]
+position = Vector2(0, -21)
+texture = ExtResource("1_symyc")
+hframes = 21
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
+position = Vector2(0, -6.5)
+shape = SubResource("RectangleShape2D_edjgo")
