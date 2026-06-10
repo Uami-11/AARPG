@@ -1,16 +1,20 @@
 [gd_scene format=3 uid="uid://dcl0s2y5lmfvm"]
 
-[ext_resource type="Texture2D" uid="uid://jolqhwg55fum" path="res://entities/player/sprites/ExamplePlayerSprite.png" id="1_symyc"]
+[ext_resource type="Script" uid="uid://bhf7kmuyfjb74" path="res://entities/player/Player.cs" id="1_abrql"]
+[ext_resource type="SpriteFrames" uid="uid://bujc34r3t8osx" path="res://entities/player/player_sprite_frames.tres" id="2_abrql"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(16, 15)
 
 [node name="Player" type="CharacterBody2D" unique_id=606448413]
+script = ExtResource("1_abrql")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=818882439]
-position = Vector2(0, -21)
-texture = ExtResource("1_symyc")
-hframes = 21
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1316207255]
+position = Vector2(0, -20)
+sprite_frames = ExtResource("2_abrql")
+animation = &"idle_down"
+autoplay = "idle_down"
+frame_progress = 0.8027704
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
 position = Vector2(0, -6.5)
