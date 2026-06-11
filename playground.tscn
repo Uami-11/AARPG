@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://dcl0s2y5lmfvm" path="res://entities/player/player.tscn" id="1_rupst"]
 [ext_resource type="PackedScene" uid="uid://d2nlm3tfy5ka4" path="res://environments/tilemaps/grass_01.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://baqnib87mj0a0" path="res://environments/props/plant.tscn" id="3_m8u5f"]
 
 [node name="Playground" type="Node2D" unique_id=1666777339]
+y_sort_enabled = true
 
 [node name="grass_01" parent="." unique_id=584499905 instance=ExtResource("1_wt17y")]
 
@@ -11,3 +13,12 @@
 position = Vector2(253, 176)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=69693786]
+
+[node name="Plant" parent="." unique_id=1253027591 instance=ExtResource("3_m8u5f")]
+position = Vector2(1, 205)
+
+[node name="Plant2" parent="." unique_id=2043975059 instance=ExtResource("3_m8u5f")]
+position = Vector2(-88, 180)
+
+[node name="Plant3" parent="." unique_id=726755280 instance=ExtResource("3_m8u5f")]
+position = Vector2(-7, 120)
