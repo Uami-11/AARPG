@@ -10,6 +10,7 @@
 size = Vector2(16, 15)
 
 [node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite", "stateMachine")]
+collision_mask = 16
 script = ExtResource("1_abrql")
 sprite = NodePath("AnimatedSprite2D")
 stateMachine = NodePath("StateMachine")
