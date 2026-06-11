@@ -3,8 +3,8 @@ using Godot;
 
 public partial class PlayerStateMachine : Node
 {
-    [Export]
-    public Player you;
+    // [Export]
+    // public Player you;
 
     public List<State> states = new List<State>();
     public State prevState { get; set; }
@@ -30,7 +30,7 @@ public partial class PlayerStateMachine : Node
         ChangeState(currentState.HandleInput(@event));
     }
 
-    public void Initialize()
+    public void Initialize(Player you)
     {
         foreach (Node c in GetChildren())
         {

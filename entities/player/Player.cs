@@ -6,30 +6,24 @@ public partial class Player : CharacterBody2D
     [Export]
     public AnimatedSprite2D sprite;
 
-    [ExportCategory("Player Values")]
     [Export]
-    public float moveSpeed = 100.0f;
+    public PlayerStateMachine stateMachine;
 
+    [ExportCategory("Player Values")]
     [Export]
     public Vector2 cardinalDirection = Vector2.Down;
 
     public Vector2 direction = Vector2.Zero;
 
-    public string state = "idle";
-
-    public override void _Ready() { }
+    public override void _Ready()
+    {
+        stateMachine.Initialize(this);
+    }
 
     public override void _Process(double delta)
     {
         direction.X = Input.GetActionStrength("right") - Input.GetActionStrength("left");
         direction.Y = Input.GetActionStrength("down") - Input.GetActionStrength("up");
-
-        Velocity = direction * moveSpeed;
-
-        if (SetState() || SetDirection())
-        {
-            UpdateAnimation();
-        }
     }
 
     public override void _PhysicsProcess(double delta)
@@ -70,18 +64,7 @@ public partial class Player : CharacterBody2D
         return true;
     }
 
-    public bool SetState()
-    {
-        string newState = (direction == Vector2.Zero) ? "idle" : "run";
-        if (newState == state)
-        {
-            return false;
-        }
-        state = newState;
-        return true;
-    }
-
-    public void UpdateAnimation()
+    public void UpdateAnimation(string state)
     {
         sprite.Play(state + "_" + AnimDirection());
     }

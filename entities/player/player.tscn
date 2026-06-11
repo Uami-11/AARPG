@@ -2,13 +2,16 @@
 
 [ext_resource type="Script" uid="uid://bhf7kmuyfjb74" path="res://entities/player/Player.cs" id="1_abrql"]
 [ext_resource type="SpriteFrames" uid="uid://bujc34r3t8osx" path="res://entities/player/player_sprite_frames.tres" id="2_abrql"]
+[ext_resource type="Script" uid="uid://c6nvchpwy5ooc" path="res://entities/player/scripts/PlayerStateMachine.cs" id="3_sglur"]
+[ext_resource type="Script" uid="uid://dvf15dltbd7cw" path="res://entities/player/scripts/StateIdle.cs" id="4_bls4j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(16, 15)
 
-[node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite")]
+[node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite", "stateMachine")]
 script = ExtResource("1_abrql")
 sprite = NodePath("AnimatedSprite2D")
+stateMachine = NodePath("StateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1316207255]
 position = Vector2(0, -20)
@@ -20,3 +23,11 @@ frame_progress = 0.73955595
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
 position = Vector2(0, -6.5)
 shape = SubResource("RectangleShape2D_edjgo")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1510759433]
+script = ExtResource("3_sglur")
+
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1849346894]
+script = ExtResource("4_bls4j")
+
+[node name="Run" type="Node" parent="StateMachine" unique_id=1212552841]
