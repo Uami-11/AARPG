@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://b4uyss6d2qr1y" path="res://entities/player/assets/sounds/SwordSwoosh.wav" id="8_26q78"]
 [ext_resource type="Script" uid="uid://bcndjay6a7orp" path="res://entities/player/Interactions.cs" id="10_7thud"]
 [ext_resource type="PackedScene" uid="uid://idhuemdk31ox" path="res://core/components/hurtbox/hurt_box.tscn" id="10_wvtmh"]
+[ext_resource type="Script" uid="uid://bf8sx2swsg7me" path="res://entities/player/scripts/Camera2d.cs" id="12_a1qjk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26q78"]
 atlas = ExtResource("3_qiwj3")
@@ -193,3 +194,6 @@ monitoring = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactions/HurtBox" unique_id=973433890]
 shape = SubResource("CircleShape2D_7thud")
 debug_color = Color(0.9775755, 0, 0.40673095, 0.41960785)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1826713890]
+script = ExtResource("12_a1qjk")

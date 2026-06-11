@@ -12,8 +12,6 @@ y_sort_enabled = true
 [node name="Player" parent="." unique_id=606448413 instance=ExtResource("1_rupst")]
 position = Vector2(253, 176)
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=69693786]
-
 [node name="Plant" parent="." unique_id=1253027591 instance=ExtResource("3_m8u5f")]
 position = Vector2(1, 205)
 
