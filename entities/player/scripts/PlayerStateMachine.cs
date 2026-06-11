@@ -3,6 +3,9 @@ using Godot;
 
 public partial class PlayerStateMachine : Node
 {
+    [Export]
+    public Player you;
+
     public List<State> states = new List<State>();
     public State prevState { get; set; }
     public State currentState { get; set; }
@@ -12,7 +15,20 @@ public partial class PlayerStateMachine : Node
         ProcessMode = ProcessModeEnum.Disabled;
     }
 
-    public override void _Process(double delta) { }
+    public override void _Process(double delta)
+    {
+        ChangeState(currentState.Process(delta));
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        ChangeState(currentState.Physics(delta));
+    }
+
+    public override void _UnhandledInput(InputEvent @event)
+    {
+        ChangeState(currentState.HandleInput(@event));
+    }
 
     public void Initialize()
     {
@@ -20,6 +36,13 @@ public partial class PlayerStateMachine : Node
         {
             if (c is State)
                 states.Add((State)c);
+
+            if (states.Count > 0)
+            {
+                states[0].player = you;
+                ChangeState(states[0]);
+                ProcessMode = ProcessModeEnum.Inherit;
+            }
         }
     }
 
