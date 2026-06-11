@@ -2,6 +2,8 @@ using Godot;
 
 public partial class Player : CharacterBody2D
 {
+    public Vector2[] DIR = new Vector2[] { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
+
     [ExportCategory("Player Nodes")]
     [Export]
     public AnimatedSprite2D sprite;
@@ -38,19 +40,14 @@ public partial class Player : CharacterBody2D
 
     public bool SetDirection()
     {
-        Vector2 newDirection = cardinalDirection;
         if (direction == Vector2.Zero)
         {
             return false;
         }
-        if (direction.Y == 0)
-        {
-            newDirection = (direction.X < 0) ? Vector2.Left : Vector2.Right;
-        }
-        else if (direction.X == 0)
-        {
-            newDirection = (direction.Y < 0) ? Vector2.Up : Vector2.Down;
-        }
+
+        int directionID = (int)(Mathf.Round((direction.Angle() / float.Tau * DIR.Length)));
+
+        Vector2 newDirection = DIR[directionID];
 
         if (newDirection == cardinalDirection)
         {
