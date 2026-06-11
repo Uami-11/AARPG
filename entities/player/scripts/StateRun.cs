@@ -5,8 +5,12 @@ public partial class StateRun : State
     [Export]
     public float moveSpeed = 200f;
 
+    [ExportCategory("Other States")]
     [Export]
     public State idle;
+
+    [Export]
+    public State attack;
 
     public override void Enter()
     {
@@ -35,6 +39,10 @@ public partial class StateRun : State
 
     public override State HandleInput(InputEvent _event)
     {
+        if (_event.IsActionPressed("attack"))
+        {
+            return attack;
+        }
         return null;
     }
 }

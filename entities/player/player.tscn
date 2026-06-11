@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c6nvchpwy5ooc" path="res://entities/player/scripts/PlayerStateMachine.cs" id="3_sglur"]
 [ext_resource type="Script" uid="uid://dvf15dltbd7cw" path="res://entities/player/scripts/StateIdle.cs" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://coux0aol6ku8k" path="res://entities/player/scripts/StateRun.cs" id="5_fkugw"]
+[ext_resource type="Script" uid="uid://0u8g6suluvna" path="res://entities/player/scripts/StateAttack.cs" id="6_8fjmc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(16, 4)
@@ -31,12 +32,17 @@ shape = SubResource("RectangleShape2D_edjgo")
 [node name="StateMachine" type="Node" parent="." unique_id=1510759433]
 script = ExtResource("3_sglur")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=1849346894 node_paths=PackedStringArray("run")]
+[node name="Idle" type="Node" parent="StateMachine" unique_id=1849346894 node_paths=PackedStringArray("run", "attack")]
 script = ExtResource("4_bls4j")
 run = NodePath("../Run")
+attack = NodePath("../Attack")
 
-[node name="Run" type="Node" parent="StateMachine" unique_id=1212552841 node_paths=PackedStringArray("idle")]
+[node name="Run" type="Node" parent="StateMachine" unique_id=1212552841 node_paths=PackedStringArray("idle", "attack")]
 script = ExtResource("5_fkugw")
 idle = NodePath("../Idle")
+attack = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934 node_paths=PackedStringArray("idle", "run")]
+script = ExtResource("6_8fjmc")
+idle = NodePath("../Idle")
+run = NodePath("../Run")
