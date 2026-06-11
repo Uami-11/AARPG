@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://coux0aol6ku8k" path="res://entities/player/scripts/StateRun.cs" id="5_fkugw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
-size = Vector2(16, 15)
+size = Vector2(16, 4)
 
 [node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite", "stateMachine")]
 collision_mask = 16
@@ -18,12 +18,11 @@ stateMachine = NodePath("StateMachine")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1316207255]
 position = Vector2(0, -20)
 sprite_frames = ExtResource("2_abrql")
-animation = &"run_side"
+animation = &"idle_down"
 autoplay = "idle_down"
-frame_progress = 0.73955595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
-position = Vector2(0, -6.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_edjgo")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1510759433]
