@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://wgf5stsrwi40"]
 
-[ext_resource type="PackedScene" uid="uid://dcl0s2y5lmfvm" path="res://entities/player/player.tscn" id="1_rupst"]
-[ext_resource type="PackedScene" uid="uid://d2nlm3tfy5ka4" path="res://environments/tilemaps/grass_01.tscn" id="1_wt17y"]
-[ext_resource type="PackedScene" uid="uid://baqnib87mj0a0" path="res://environments/props/plant.tscn" id="3_m8u5f"]
+[ext_resource type="PackedScene" uid="uid://dcl0s2y5lmfvm" path="res://entities/player/resources/player.tscn" id="1_rupst"]
+[ext_resource type="PackedScene" uid="uid://d2nlm3tfy5ka4" path="res://environments/tilemaps/resources/grass_01.tscn" id="1_wt17y"]
+[ext_resource type="PackedScene" uid="uid://baqnib87mj0a0" path="res://environments/props/resources/plant.tscn" id="3_m8u5f"]
 
 [node name="Playground" type="Node2D" unique_id=1666777339]
 y_sort_enabled = true

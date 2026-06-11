@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://d2nlm3tfy5ka4"]
 
 [ext_resource type="TileSet" uid="uid://bd2uqixo6jha" path="res://environments/tilemaps/resources/grass_01.tres" id="1_srll6"]
-[ext_resource type="Script" uid="uid://26xklciyttrx" path="res://environments/tilemaps/LevelTilemap.cs" id="2_jci32"]
+[ext_resource type="Script" uid="uid://26xklciyttrx" path="res://environments/tilemaps/scripts/LevelTilemap.cs" id="2_jci32"]
 
 [node name="grass_01" type="Node2D" unique_id=584499905]
 z_index = -1
