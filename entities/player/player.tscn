@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://coux0aol6ku8k" path="res://entities/player/scripts/StateRun.cs" id="5_fkugw"]
 [ext_resource type="Script" uid="uid://0u8g6suluvna" path="res://entities/player/scripts/StateAttack.cs" id="6_8fjmc"]
 [ext_resource type="AudioStream" uid="uid://b4uyss6d2qr1y" path="res://entities/player/assets/sounds/SwordSwoosh.wav" id="8_26q78"]
+[ext_resource type="Script" uid="uid://bcndjay6a7orp" path="res://entities/player/Interactions.cs" id="10_7thud"]
+[ext_resource type="PackedScene" uid="uid://idhuemdk31ox" path="res://core/components/hurtbox/hurt_box.tscn" id="10_wvtmh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26q78"]
 atlas = ExtResource("3_qiwj3")
@@ -115,6 +117,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_edjgo"]
 size = Vector2(16, 4)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_7thud"]
+radius = 20.0
+
 [node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite", "stateMachine")]
 collision_mask = 16
 motion_mode = 1
@@ -160,11 +165,12 @@ script = ExtResource("5_fkugw")
 idle = NodePath("../Idle")
 attack = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934 node_paths=PackedStringArray("attackAnim", "audioPlayer", "idle", "run")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934 node_paths=PackedStringArray("attackAnim", "audioPlayer", "hurtbox", "idle", "run")]
 script = ExtResource("6_8fjmc")
 attackAnim = NodePath("../../sprite/slash")
 attackSound = ExtResource("8_26q78")
 audioPlayer = NodePath("../../Audio/AudioStreamPlayer2D")
+hurtbox = NodePath("../../interactions/HurtBox")
 idle = NodePath("../Idle")
 run = NodePath("../Run")
 
@@ -172,3 +178,18 @@ run = NodePath("../Run")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio" unique_id=2120718260]
 max_polyphony = 4
+
+[node name="interactions" type="Node2D" parent="." unique_id=322757892 node_paths=PackedStringArray("player")]
+rotation = 0.039963722
+script = ExtResource("10_7thud")
+player = NodePath("..")
+
+[node name="HurtBox" parent="interactions" unique_id=1607503607 instance=ExtResource("10_wvtmh")]
+position = Vector2(0, 16)
+rotation = -0.948094
+collision_mask = 256
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="interactions/HurtBox" unique_id=973433890]
+shape = SubResource("CircleShape2D_7thud")
+debug_color = Color(0.9775755, 0, 0.40673095, 0.41960785)

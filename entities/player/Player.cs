@@ -15,6 +15,9 @@ public partial class Player : CharacterBody2D
 
     public Vector2 direction = Vector2.Zero;
 
+    [Signal]
+    public delegate void DirectionChangedEventHandler(Vector2 newDirection);
+
     public override void _Ready()
     {
         stateMachine.Initialize(this);
@@ -55,6 +58,7 @@ public partial class Player : CharacterBody2D
         }
 
         cardinalDirection = newDirection;
+        EmitSignal(SignalName.DirectionChanged, cardinalDirection);
         if (cardinalDirection == Vector2.Left)
         {
             sprite.FlipH = true;

@@ -11,6 +11,9 @@ public partial class StateAttack : State
     [Export]
     public AudioStreamPlayer2D audioPlayer;
 
+    [Export]
+    public HurtBox hurtbox;
+
     [ExportCategory("Other States")]
     [Export]
     public State idle;
@@ -22,7 +25,7 @@ public partial class StateAttack : State
 
     public RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
 
-    public override void Enter()
+    public override async void Enter()
     {
         if (player.sprite.FlipH)
         {
@@ -47,11 +50,16 @@ public partial class StateAttack : State
         audioPlayer.Stream = attackSound;
         audioPlayer.PitchScale = numberGenerator.RandfRange(0.9f, 1.1f);
         audioPlayer.Play();
+
+        await ToSignal(GetTree().CreateTimer(0.075f), SceneTreeTimer.SignalName.Timeout);
+
+        hurtbox.Monitoring = true;
     }
 
     public override void Exit()
     {
         player.sprite.AnimationFinished -= EndAttack;
+        hurtbox.Monitoring = false;
     }
 
     public override State Process(double delta)
