@@ -5,6 +5,12 @@ public partial class StateAttack : State
     [Export]
     public AnimatedSprite2D attackAnim;
 
+    [Export]
+    public AudioStream attackSound;
+
+    [Export]
+    public AudioStreamPlayer2D audioPlayer;
+
     [ExportCategory("Other States")]
     [Export]
     public State idle;
@@ -13,6 +19,8 @@ public partial class StateAttack : State
     public State run;
 
     public bool attacking = false;
+
+    public RandomNumberGenerator numberGenerator = new RandomNumberGenerator();
 
     public override void Enter()
     {
@@ -35,6 +43,10 @@ public partial class StateAttack : State
         attacking = true;
 
         player.sprite.AnimationFinished += EndAttack;
+
+        audioPlayer.Stream = attackSound;
+        audioPlayer.PitchScale = numberGenerator.RandfRange(0.9f, 1.1f);
+        audioPlayer.Play();
     }
 
     public override void Exit()

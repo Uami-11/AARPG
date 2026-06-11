@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bhf7kmuyfjb74" path="res://entities/player/Player.cs" id="1_abrql"]
 [ext_resource type="SpriteFrames" uid="uid://bujc34r3t8osx" path="res://entities/player/player_sprite_frames.tres" id="2_abrql"]
-[ext_resource type="Texture2D" uid="uid://lqeuco2h3ft6" path="res://entities/player/sprites/AttackSprite01.png" id="3_qiwj3"]
+[ext_resource type="Texture2D" uid="uid://lqeuco2h3ft6" path="res://entities/player/assets/sprites/AttackSprite01.png" id="3_qiwj3"]
 [ext_resource type="Script" uid="uid://c6nvchpwy5ooc" path="res://entities/player/scripts/PlayerStateMachine.cs" id="3_sglur"]
+[ext_resource type="Texture2D" uid="uid://crbgcivi8g4i6" path="res://entities/player/assets/sprites/Shadow.png" id="4_bectd"]
 [ext_resource type="Script" uid="uid://dvf15dltbd7cw" path="res://entities/player/scripts/StateIdle.cs" id="4_bls4j"]
 [ext_resource type="Script" uid="uid://coux0aol6ku8k" path="res://entities/player/scripts/StateRun.cs" id="5_fkugw"]
 [ext_resource type="Script" uid="uid://0u8g6suluvna" path="res://entities/player/scripts/StateAttack.cs" id="6_8fjmc"]
+[ext_resource type="AudioStream" uid="uid://b4uyss6d2qr1y" path="res://entities/player/assets/sounds/SwordSwoosh.wav" id="8_26q78"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_26q78"]
 atlas = ExtResource("3_qiwj3")
@@ -135,6 +137,12 @@ animation = &"attack_down"
 frame = 3
 frame_progress = 1.0
 
+[node name="shadow" type="Sprite2D" parent="sprite" unique_id=672426450]
+modulate = Color(0.13077214, 0.13077214, 0.13077211, 1)
+show_behind_parent = true
+position = Vector2(0, 18)
+texture = ExtResource("4_bectd")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_edjgo")
@@ -152,8 +160,15 @@ script = ExtResource("5_fkugw")
 idle = NodePath("../Idle")
 attack = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934 node_paths=PackedStringArray("attackAnim", "idle", "run")]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934 node_paths=PackedStringArray("attackAnim", "audioPlayer", "idle", "run")]
 script = ExtResource("6_8fjmc")
 attackAnim = NodePath("../../sprite/slash")
+attackSound = ExtResource("8_26q78")
+audioPlayer = NodePath("../../Audio/AudioStreamPlayer2D")
 idle = NodePath("../Idle")
 run = NodePath("../Run")
+
+[node name="Audio" type="Node2D" parent="." unique_id=239289113]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Audio" unique_id=2120718260]
+max_polyphony = 4
