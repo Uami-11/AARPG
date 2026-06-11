@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://djyhq1xvvmbhq"]
+
+[ext_resource type="Texture2D" uid="uid://crbgcivi8g4i6" path="res://entities/player/assets/sprites/Shadow.png" id="1_f1umh"]
+[ext_resource type="SpriteFrames" uid="uid://cfpesnpcqaedn" path="res://entities/enemies/resources/slime.tres" id="2_kwxe8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsh56"]
+radius = 5.0
+height = 22.0
+
+[node name="Slime" type="CharacterBody2D" unique_id=101825249]
+collision_layer = 256
+collision_mask = 16
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113540512]
+modulate = Color(0.9882353, 0.3764706, 0, 0.54509807)
+position = Vector2(0, 21)
+texture = ExtResource("1_f1umh")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=878128100]
+sprite_frames = ExtResource("2_kwxe8")
+animation = &"run_down"
+autoplay = "idle_down"
+frame_progress = 0.53118175
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=756705161]
+position = Vector2(0, 19)
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_nsh56")
