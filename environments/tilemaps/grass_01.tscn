@@ -3,6 +3,7 @@
 [ext_resource type="TileSet" uid="uid://bd2uqixo6jha" path="res://environments/tilemaps/resources/grass_01.tres" id="1_srll6"]
 
 [node name="grass_01" type="Node2D" unique_id=584499905]
+z_index = -1
 
 [node name="Grass" type="TileMapLayer" parent="." unique_id=1427775790]
 z_index = -1

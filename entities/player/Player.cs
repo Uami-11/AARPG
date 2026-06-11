@@ -41,29 +41,31 @@ public partial class Player : CharacterBody2D
     public bool SetDirection()
     {
         if (direction == Vector2.Zero)
-        {
             return false;
-        }
 
-        int directionID = (int)(Mathf.Round((direction.Angle() / float.Tau * DIR.Length)));
+        int directionID;
+        bool isHoriz = cardinalDirection == Vector2.Left || cardinalDirection == Vector2.Right;
+
+        if (isHoriz && direction.X != 0)
+            directionID = direction.X > 0 ? 0 : 2;
+        else if (!isHoriz && direction.Y != 0)
+            directionID = direction.Y > 0 ? 1 : 3;
+        else if (Mathf.Abs(direction.X) > Mathf.Abs(direction.Y))
+            directionID = direction.X > 0 ? 0 : 2;
+        else
+            directionID = direction.Y > 0 ? 1 : 3;
 
         Vector2 newDirection = DIR[directionID];
 
         if (newDirection == cardinalDirection)
-        {
             return false;
-        }
 
         cardinalDirection = newDirection;
         EmitSignal(SignalName.DirectionChanged, cardinalDirection);
         if (cardinalDirection == Vector2.Left)
-        {
             sprite.FlipH = true;
-        }
         else
-        {
             sprite.FlipH = false;
-        }
         return true;
     }
 
