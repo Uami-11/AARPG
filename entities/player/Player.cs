@@ -24,6 +24,8 @@ public partial class Player : CharacterBody2D
     {
         direction.X = Input.GetActionStrength("right") - Input.GetActionStrength("left");
         direction.Y = Input.GetActionStrength("down") - Input.GetActionStrength("up");
+
+        direction = direction.Normalized();
     }
 
     public override void _PhysicsProcess(double delta)

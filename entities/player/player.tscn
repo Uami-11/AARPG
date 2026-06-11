@@ -11,18 +11,21 @@ size = Vector2(16, 4)
 
 [node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("sprite", "stateMachine")]
 collision_mask = 16
+motion_mode = 1
 script = ExtResource("1_abrql")
 sprite = NodePath("AnimatedSprite2D")
 stateMachine = NodePath("StateMachine")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1316207255]
-position = Vector2(0, -20)
+position = Vector2(0, -22)
 sprite_frames = ExtResource("2_abrql")
-animation = &"idle_down"
+animation = &"attack_side"
 autoplay = "idle_down"
+frame = 2
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=898051708]
-position = Vector2(0, -1)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_edjgo")
 
 [node name="StateMachine" type="Node" parent="." unique_id=1510759433]
@@ -35,3 +38,5 @@ run = NodePath("../Run")
 [node name="Run" type="Node" parent="StateMachine" unique_id=1212552841 node_paths=PackedStringArray("idle")]
 script = ExtResource("5_fkugw")
 idle = NodePath("../Idle")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=1372062934]
