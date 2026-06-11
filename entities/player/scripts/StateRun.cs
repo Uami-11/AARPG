@@ -1,23 +1,30 @@
 using Godot;
 
-public partial class StateIdle : State
+public partial class StateRun : State
 {
     [Export]
-    public State run;
+    public float moveSpeed = 200f;
+
+    [Export]
+    public State idle;
 
     public override void Enter()
     {
-        player.UpdateAnimation("idle");
+        player.UpdateAnimation("run");
     }
 
     public override void Exit() { }
 
     public override State Process(double delta)
     {
-        if (player.direction != Vector2.Zero)
-            return run;
+        if (player.direction == Vector2.Zero)
+            return idle;
 
-        player.Velocity = Vector2.Zero;
+        player.Velocity = player.direction * moveSpeed;
+
+        if (player.SetDirection())
+            player.UpdateAnimation("run");
+
         return null;
     }
 

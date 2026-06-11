@@ -39,7 +39,8 @@ public partial class PlayerStateMachine : Node
 
             if (states.Count > 0)
             {
-                states[0].player = you;
+                foreach (State state in states)
+                    state.player = you;
                 ChangeState(states[0]);
                 ProcessMode = ProcessModeEnum.Inherit;
             }
