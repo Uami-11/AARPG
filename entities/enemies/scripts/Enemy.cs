@@ -1,46 +1,51 @@
 using Godot;
 
-public partial class Player : CharacterBody2D
+public partial class Enemy : CharacterBody2D
 {
+    [Signal]
+    public delegate void directionChangedEventHandler(Vector2 newDirection);
+
+    [Signal]
+    public delegate void enemyDamagedEventHandler();
+
     public Vector2[] DIR = new Vector2[] { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
-    [ExportCategory("Player Nodes")]
     [Export]
-    public AnimatedSprite2D sprite;
+    public int health = 3;
 
-    [Export]
-    public PlayerStateMachine stateMachine;
-
-    [ExportCategory("Player Values")]
-    [Export]
     public Vector2 cardinalDirection = Vector2.Down;
 
     public Vector2 direction = Vector2.Zero;
 
-    [Signal]
-    public delegate void DirectionChangedEventHandler(Vector2 newDirection);
+    public Player player;
+
+    public bool invulnerable = false;
+
+    [Export]
+    public AnimatedSprite2D sprite;
+
+    [Export]
+    public HitBox hitBox;
+
+    [Export]
+    public EnemyStateMachine stateMachine;
 
     public override void _Ready()
     {
-        GlobalPlayerManager.Instance.player = this;
         stateMachine.Initialize(this);
+        player = GlobalPlayerManager.Instance.player;
     }
 
-    public override void _Process(double delta)
-    {
-        direction.X = Input.GetActionStrength("right") - Input.GetActionStrength("left");
-        direction.Y = Input.GetActionStrength("down") - Input.GetActionStrength("up");
-
-        direction = direction.Normalized();
-    }
+    public override void _Process(double delta) { }
 
     public override void _PhysicsProcess(double delta)
     {
         MoveAndSlide();
     }
 
-    public bool SetDirection()
+    public bool SetDirection(Vector2 newDir)
     {
+        direction = newDir;
         if (direction == Vector2.Zero)
             return false;
 
@@ -62,11 +67,12 @@ public partial class Player : CharacterBody2D
             return false;
 
         cardinalDirection = newDirection;
-        EmitSignal(SignalName.DirectionChanged, cardinalDirection);
+        EmitSignal(SignalName.directionChanged, cardinalDirection);
         if (cardinalDirection == Vector2.Left)
             sprite.FlipH = true;
         else
             sprite.FlipH = false;
+
         return true;
     }
 
