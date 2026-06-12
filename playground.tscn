@@ -23,4 +23,4 @@ position = Vector2(-88, 180)
 position = Vector2(-7, 120)
 
 [node name="Slime" parent="." unique_id=101825249 instance=ExtResource("4_is3ju")]
-position = Vector2(367, 100)
+position = Vector2(412, 93)

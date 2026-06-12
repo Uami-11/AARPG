@@ -34,7 +34,15 @@ public partial class EnemyStateMachine : Node
         }
     }
 
-    public override void _Process(double delta) { }
+    public override void _Process(double delta)
+    {
+        ChangeState(currentState.Process(delta));
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        ChangeState(currentState.Physics(delta));
+    }
 
     public void ChangeState(EnemyState newState)
     {

@@ -18,17 +18,17 @@ stateMachine = NodePath("EnemyStateMachine")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113540512]
 modulate = Color(0.9882353, 0.3764706, 0, 0.54509807)
-position = Vector2(0, 21)
+position = Vector2(0, -3)
 texture = ExtResource("1_f1umh")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=878128100]
+position = Vector2(0, -24)
 sprite_frames = ExtResource("2_kwxe8")
-animation = &"run_down"
+animation = &"idle_down"
 autoplay = "idle_down"
-frame_progress = 0.53118175
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=756705161]
-position = Vector2(0, 19)
+position = Vector2(0, -5)
 rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_nsh56")
 
