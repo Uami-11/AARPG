@@ -74,6 +74,42 @@ region = Rect2(832, 0, 64, 64)
 atlas = ExtResource("1_mxu0d")
 region = Rect2(896, 0, 64, 64)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_kw8pu"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ncewx"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6g2v"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(256, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtsw0"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(640, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_du2s2"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(576, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4lro7"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(512, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30qmi"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(320, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nuwn6"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(384, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36nyp"]
+atlas = ExtResource("1_mxu0d")
+region = Rect2(448, 64, 64, 64)
+
 [resource]
 animations = [{
 "frames": [{
@@ -177,4 +213,55 @@ animations = [{
 "loop": true,
 "name": &"run_up",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kw8pu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncewx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6g2v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ncewx")
+}],
+"loop": true,
+"name": &"stun_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtsw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_du2s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4lro7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_du2s2")
+}],
+"loop": true,
+"name": &"stun_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30qmi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuwn6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36nyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nuwn6")
+}],
+"loop": true,
+"name": &"stun_up",
+"speed": 5.0
 }]

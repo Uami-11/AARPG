@@ -3,13 +3,73 @@
 [ext_resource type="Texture2D" uid="uid://crbgcivi8g4i6" path="res://entities/player/assets/sprites/Shadow.png" id="1_f1umh"]
 [ext_resource type="Script" uid="uid://ck1kc16ufe41k" path="res://entities/enemies/scripts/Enemy.cs" id="1_nsh56"]
 [ext_resource type="SpriteFrames" uid="uid://cfpesnpcqaedn" path="res://entities/enemies/resources/slime.tres" id="2_kwxe8"]
+[ext_resource type="Texture2D" uid="uid://cxum4b8j1wvxr" path="res://entities/enemies/assets/images/DestroySmoke.png" id="4_hlxbh"]
 [ext_resource type="Script" uid="uid://dqd0jdd5xc4gd" path="res://entities/enemies/scripts/EnemyStateMachine.cs" id="4_mq8c3"]
 [ext_resource type="Script" uid="uid://bkhjhl8ju7yik" path="res://entities/enemies/scripts/slime/EnemyStateIdle.cs" id="5_svtdl"]
 [ext_resource type="Script" uid="uid://crdnxbq3sw23m" path="res://entities/enemies/scripts/slime/EnemyStateWander.cs" id="6_rc6ws"]
+[ext_resource type="PackedScene" uid="uid://idhuemdk31ox" path="res://core/components/hurtbox/hurt_box.tscn" id="7_rc6ws"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ri5n"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oacvj"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0url7"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li1ic"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k7o0"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtya7"]
+atlas = ExtResource("4_hlxbh")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ji7yd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": null
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ri5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oacvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0url7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li1ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k7o0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtya7")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsh56"]
 radius = 5.0
 height = 22.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hlxbh"]
 
 [node name="Slime" type="CharacterBody2D" unique_id=101825249 node_paths=PackedStringArray("sprite", "stateMachine")]
 collision_layer = 256
@@ -28,6 +88,13 @@ position = Vector2(0, -24)
 sprite_frames = ExtResource("2_kwxe8")
 animation = &"idle_down"
 autoplay = "idle_down"
+frame_progress = 0.49672386
+
+[node name="DestroyEffect" type="AnimatedSprite2D" parent="." unique_id=173054641]
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_ji7yd")
+frame = 7
+frame_progress = 0.41819203
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=756705161]
 position = Vector2(0, -5)
@@ -37,10 +104,24 @@ shape = SubResource("CapsuleShape2D_nsh56")
 [node name="EnemyStateMachine" type="Node" parent="." unique_id=411058731]
 script = ExtResource("4_mq8c3")
 
-[node name="IdleState" type="Node" parent="EnemyStateMachine" unique_id=1465414404 node_paths=PackedStringArray("afterIdleState")]
+[node name="Idle" type="Node" parent="EnemyStateMachine" unique_id=1465414404 node_paths=PackedStringArray("afterIdleState")]
 script = ExtResource("5_svtdl")
-afterIdleState = NodePath("../WanderState")
+afterIdleState = NodePath("../Wander")
 
-[node name="WanderState" type="Node" parent="EnemyStateMachine" unique_id=240292541 node_paths=PackedStringArray("nextState")]
+[node name="Wander" type="Node" parent="EnemyStateMachine" unique_id=240292541 node_paths=PackedStringArray("nextState")]
 script = ExtResource("6_rc6ws")
-nextState = NodePath("../IdleState")
+nextState = NodePath("../Idle")
+
+[node name="Stun" type="Node" parent="EnemyStateMachine" unique_id=1330736055]
+
+[node name="Destroy" type="Node" parent="EnemyStateMachine" unique_id=1011016724]
+
+[node name="HurtBox" parent="." unique_id=1607503607 instance=ExtResource("7_rc6ws")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox" unique_id=50583314]
+position = Vector2(0, -11)
+shape = SubResource("CircleShape2D_hlxbh")
+debug_color = Color(0.96544844, 1.0588765e-06, 0.4895571, 0.41960785)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=393788756]
+max_polyphony = 4
