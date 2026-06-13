@@ -3,7 +3,7 @@ using Godot;
 public partial class StateAttack : State
 {
     [Export]
-    public AnimatedSprite2D attackAnim;
+    public AnimationPlayer attackAnim;
 
     [Export]
     public AudioStream attackSound;
@@ -27,25 +27,12 @@ public partial class StateAttack : State
 
     public override async void Enter()
     {
-        if (player.sprite.FlipH)
-        {
-            attackAnim.FlipH = true;
-        }
-        else
-        {
-            attackAnim.FlipH = false;
-        }
-        attackAnim.Visible = true;
         player.UpdateAnimation("attack");
-        if (player.AnimDirection() == "up")
-            attackAnim.ShowBehindParent = true;
-        else
-            attackAnim.ShowBehindParent = false;
 
         attackAnim.Play("attack_" + player.AnimDirection());
         attacking = true;
 
-        player.sprite.AnimationFinished += EndAttack;
+        player.animationPlayer.AnimationFinished += EndAttack;
 
         audioPlayer.Stream = attackSound;
         audioPlayer.PitchScale = numberGenerator.RandfRange(0.9f, 1.1f);
@@ -58,7 +45,7 @@ public partial class StateAttack : State
 
     public override void Exit()
     {
-        player.sprite.AnimationFinished -= EndAttack;
+        player.animationPlayer.AnimationFinished -= EndAttack;
         hurtbox.Monitoring = false;
     }
 
@@ -86,9 +73,8 @@ public partial class StateAttack : State
         return null;
     }
 
-    public void EndAttack()
+    public void EndAttack(StringName _name)
     {
         attacking = false;
-        attackAnim.Visible = false;
     }
 }
