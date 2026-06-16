@@ -2,68 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://crbgcivi8g4i6" path="res://entities/player/assets/sprites/Shadow.png" id="1_f1umh"]
 [ext_resource type="Script" uid="uid://ck1kc16ufe41k" path="res://entities/enemies/scripts/Enemy.cs" id="1_nsh56"]
-[ext_resource type="SpriteFrames" uid="uid://cfpesnpcqaedn" path="res://entities/enemies/resources/slime.tres" id="2_kwxe8"]
-[ext_resource type="Texture2D" uid="uid://cxum4b8j1wvxr" path="res://entities/enemies/assets/images/DestroySmoke.png" id="4_hlxbh"]
+[ext_resource type="Texture2D" uid="uid://bunjfnnbp5x0w" path="res://entities/enemies/assets/images/Slime.png" id="3_rc6ws"]
 [ext_resource type="Script" uid="uid://dqd0jdd5xc4gd" path="res://entities/enemies/scripts/EnemyStateMachine.cs" id="4_mq8c3"]
 [ext_resource type="Script" uid="uid://bkhjhl8ju7yik" path="res://entities/enemies/scripts/slime/EnemyStateIdle.cs" id="5_svtdl"]
 [ext_resource type="Script" uid="uid://crdnxbq3sw23m" path="res://entities/enemies/scripts/slime/EnemyStateWander.cs" id="6_rc6ws"]
 [ext_resource type="PackedScene" uid="uid://idhuemdk31ox" path="res://core/components/hurtbox/hurt_box.tscn" id="7_rc6ws"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8ri5n"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(0, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_oacvj"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(64, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0url7"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(128, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_li1ic"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(192, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5k7o0"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dtya7"]
-atlas = ExtResource("4_hlxbh")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ji7yd"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8ri5n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_oacvj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0url7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_li1ic")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5k7o0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dtya7")
-}, {
-"duration": 1.0,
-"texture": null
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nsh56"]
 radius = 5.0
@@ -71,30 +14,200 @@ height = 22.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hlxbh"]
 
-[node name="Slime" type="CharacterBody2D" unique_id=101825249 node_paths=PackedStringArray("sprite", "stateMachine")]
+[sub_resource type="Animation" id="Animation_hlxbh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slimeSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -23)]
+}
+
+[sub_resource type="Animation" id="Animation_8ri5n"]
+resource_name = "idle_down"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0, 2]
+}
+
+[sub_resource type="Animation" id="Animation_oacvj"]
+resource_name = "idle_side"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6, 8]
+}
+
+[sub_resource type="Animation" id="Animation_0url7"]
+resource_name = "idle_up"
+length = 0.3
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_li1ic"]
+resource_name = "run_down"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [9, 10, 11, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slimeSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.4, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -23), Vector2(0, -23), Vector2(0, -30), Vector2(0, -23)]
+}
+
+[sub_resource type="Animation" id="Animation_5k7o0"]
+resource_name = "run_side"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 15]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slimeSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.4, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -23), Vector2(0, -23), Vector2(0, -30), Vector2(0, -23)]
+}
+
+[sub_resource type="Animation" id="Animation_dtya7"]
+resource_name = "run_up"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("slimeSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.13333334, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 12]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("slimeSprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.33333334, 0.4, 0.6),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0, -23), Vector2(0, -23), Vector2(0, -30), Vector2(0, -23)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ji7yd"]
+_data = {
+&"RESET": SubResource("Animation_hlxbh"),
+&"idle_down": SubResource("Animation_8ri5n"),
+&"idle_side": SubResource("Animation_oacvj"),
+&"idle_up": SubResource("Animation_0url7"),
+&"run_down": SubResource("Animation_li1ic"),
+&"run_side": SubResource("Animation_5k7o0"),
+&"run_up": SubResource("Animation_dtya7")
+}
+
+[node name="Slime" type="CharacterBody2D" unique_id=101825249 node_paths=PackedStringArray("animationPlayer", "sprite", "stateMachine")]
 collision_layer = 256
 collision_mask = 16
 script = ExtResource("1_nsh56")
-sprite = NodePath("AnimatedSprite2D")
+animationPlayer = NodePath("AnimationPlayer")
+sprite = NodePath("slimeSprite")
 stateMachine = NodePath("EnemyStateMachine")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2113540512]
+[node name="shadow" type="Sprite2D" parent="." unique_id=2113540512]
 modulate = Color(0.9882353, 0.3764706, 0, 0.54509807)
 position = Vector2(0, -3)
 texture = ExtResource("1_f1umh")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=878128100]
-position = Vector2(0, -24)
-sprite_frames = ExtResource("2_kwxe8")
-animation = &"idle_down"
-autoplay = "idle_down"
-frame_progress = 0.49672386
-
-[node name="DestroyEffect" type="AnimatedSprite2D" parent="." unique_id=173054641]
-position = Vector2(0, -14)
-sprite_frames = SubResource("SpriteFrames_ji7yd")
-frame = 7
-frame_progress = 0.41819203
+[node name="slimeSprite" type="Sprite2D" parent="." unique_id=1160776813]
+position = Vector2(0, -23)
+texture = ExtResource("3_rc6ws")
+hframes = 16
+vframes = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=756705161]
 position = Vector2(0, -5)
@@ -125,3 +238,7 @@ debug_color = Color(0.96544844, 1.0588765e-06, 0.4895571, 0.41960785)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=393788756]
 max_polyphony = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=635341847]
+libraries/ = SubResource("AnimationLibrary_ji7yd")
+autoplay = &"idle_down"

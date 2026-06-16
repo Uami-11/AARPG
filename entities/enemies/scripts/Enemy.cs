@@ -22,7 +22,10 @@ public partial class Enemy : CharacterBody2D
     public bool invulnerable = false;
 
     [Export]
-    public AnimatedSprite2D sprite;
+    public AnimationPlayer animationPlayer;
+
+    [Export]
+    public Sprite2D sprite;
 
     [Export]
     public HitBox hitBox;
@@ -68,17 +71,15 @@ public partial class Enemy : CharacterBody2D
 
         cardinalDirection = newDirection;
         EmitSignal(SignalName.directionChanged, cardinalDirection);
-        if (cardinalDirection == Vector2.Left)
-            sprite.FlipH = true;
-        else
-            sprite.FlipH = false;
+        float newX = (cardinalDirection == Vector2.Left) ? -1f : 1f;
+        sprite.Scale = new Vector2(newX, sprite.Scale.Y);
 
         return true;
     }
 
     public void UpdateAnimation(string state)
     {
-        sprite.Play(state + "_" + AnimDirection());
+        animationPlayer.Play(state + "_" + AnimDirection());
     }
 
     public string AnimDirection()
