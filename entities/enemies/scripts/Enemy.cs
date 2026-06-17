@@ -6,7 +6,10 @@ public partial class Enemy : CharacterBody2D
     public delegate void directionChangedEventHandler(Vector2 newDirection);
 
     [Signal]
-    public delegate void enemyDamagedEventHandler();
+    public delegate void enemyDamagedEventHandler(int damage);
+
+    [Signal]
+    public delegate void enemyDiedEventHandler();
 
     public Vector2[] DIR = new Vector2[] { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
@@ -37,6 +40,7 @@ public partial class Enemy : CharacterBody2D
     {
         stateMachine.Initialize(this);
         player = GlobalPlayerManager.Instance.player;
+        hitBox.Damaged += takeDamage;
     }
 
     public override void _Process(double delta) { }
@@ -96,5 +100,22 @@ public partial class Enemy : CharacterBody2D
         {
             return "side";
         }
+    }
+
+    private void takeDamage(int damage)
+    {
+        if (invulnerable)
+            return;
+
+        health -= damage;
+
+        if (health <= 0)
+        {
+            EmitSignal(SignalName.enemyDied);
+            GD.Print("I died");
+            return;
+        }
+
+        EmitSignal(SignalName.enemyDamaged, damage);
     }
 }
