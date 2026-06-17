@@ -16,7 +16,7 @@ public partial class HurtBox : Area2D
     {
         if (area is HitBox hitbox)
         {
-            hitbox.TakeDamage(damage);
+            hitbox.TakeDamage(this);
         }
     }
 }

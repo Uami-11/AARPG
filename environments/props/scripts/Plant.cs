@@ -14,7 +14,7 @@ public partial class Plant : Node2D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta) { }
 
-    public void TakeDamage(int _damage)
+    public void TakeDamage(HurtBox hurtBox)
     {
         QueueFree();
     }

@@ -16,6 +16,7 @@ public partial class EnemyStateStun : EnemyState
     [Export]
     public EnemyState nextState;
 
+    public Vector2 damagePosition;
     public Vector2 _direction;
 
     public bool animationFinished = false;
@@ -29,7 +30,7 @@ public partial class EnemyStateStun : EnemyState
 
     public override void Enter()
     {
-        _direction = enemy.GlobalPosition.DirectionTo(enemy.player.GlobalPosition);
+        _direction = enemy.GlobalPosition.DirectionTo(damagePosition);
         enemy.invulnerable = true;
         animationFinished = false;
         enemy.Velocity = _direction * -knockbackSpeed;
@@ -57,8 +58,9 @@ public partial class EnemyStateStun : EnemyState
         return null;
     }
 
-    public void OnEnemyDamaged(int damage)
+    public void OnEnemyDamaged(HurtBox hurtBox)
     {
+        damagePosition = hurtBox.GlobalPosition;
         stateMachine.ChangeState(this);
     }
 

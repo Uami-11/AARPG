@@ -6,10 +6,10 @@ public partial class Enemy : CharacterBody2D
     public delegate void directionChangedEventHandler(Vector2 newDirection);
 
     [Signal]
-    public delegate void enemyDamagedEventHandler(int damage);
+    public delegate void enemyDamagedEventHandler(HurtBox hurtBox);
 
     [Signal]
-    public delegate void enemyDiedEventHandler();
+    public delegate void enemyDiedEventHandler(HurtBox hurtBox);
 
     public Vector2[] DIR = new Vector2[] { Vector2.Right, Vector2.Down, Vector2.Left, Vector2.Up };
 
@@ -102,20 +102,20 @@ public partial class Enemy : CharacterBody2D
         }
     }
 
-    private void takeDamage(int damage)
+    private void takeDamage(HurtBox hurtBox)
     {
         if (invulnerable)
             return;
 
-        health -= damage;
+        health -= hurtBox.damage;
 
         if (health <= 0)
         {
-            EmitSignal(SignalName.enemyDied);
+            EmitSignal(SignalName.enemyDied, hurtBox);
             GD.Print("I died");
             return;
         }
 
-        EmitSignal(SignalName.enemyDamaged, damage);
+        EmitSignal(SignalName.enemyDamaged, hurtBox);
     }
 }
