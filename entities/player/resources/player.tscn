@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://bcndjay6a7orp" path="res://entities/player/scripts/Interactions.cs" id="10_7thud"]
 [ext_resource type="PackedScene" uid="uid://idhuemdk31ox" path="res://core/components/hurtbox/hurt_box.tscn" id="10_wvtmh"]
 [ext_resource type="Script" uid="uid://bf8sx2swsg7me" path="res://entities/player/scripts/Camera2d.cs" id="12_a1qjk"]
+[ext_resource type="PackedScene" uid="uid://cb1ww3uf7u1o2" path="res://core/components/hitbox/hit_box.tscn" id="13_iaeli"]
 
 [sub_resource type="Animation" id="Animation_xbfgp"]
 length = 0.001
@@ -430,6 +431,10 @@ size = Vector2(16, 4)
 [sub_resource type="CircleShape2D" id="CircleShape2D_7thud"]
 radius = 24.598797
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hpw8d"]
+radius = 7.0
+height = 14.0
+
 [node name="Player" type="CharacterBody2D" unique_id=606448413 node_paths=PackedStringArray("animationPlayer", "sprite", "stateMachine")]
 collision_mask = 16
 motion_mode = 1
@@ -495,21 +500,29 @@ run = NodePath("../Run")
 max_polyphony = 4
 
 [node name="interactions" type="Node2D" parent="." unique_id=322757892 node_paths=PackedStringArray("player")]
-visible = false
-position = Vector2(0, -11)
+position = Vector2(0, -20)
 rotation = 0.039963722
 script = ExtResource("10_7thud")
 player = NodePath("..")
 
 [node name="HurtBox" parent="interactions" unique_id=1607503607 instance=ExtResource("10_wvtmh")]
-position = Vector2(0, 16)
-rotation = -0.948094
+position = Vector2(0.99882746, 24.980038)
+rotation = -1.6105181
 collision_mask = 256
 monitoring = false
+damage = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="interactions/HurtBox" unique_id=973433890]
+position = Vector2(1.9073486e-06, 4.7683716e-07)
 shape = SubResource("CircleShape2D_7thud")
 debug_color = Color(0.9775755, 0, 0.40673095, 0.41960785)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1826713890]
 script = ExtResource("12_a1qjk")
+
+[node name="HitBox" parent="." unique_id=978085352 instance=ExtResource("13_iaeli")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox" unique_id=1861164870]
+position = Vector2(0, -14)
+shape = SubResource("CapsuleShape2D_hpw8d")
+debug_color = Color(0.5707387, 0.55616, 3.85046e-07, 0.41960785)
